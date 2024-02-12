@@ -39,7 +39,7 @@ jobs:
         with:
           platforms: linux/amd64
           context: scripts/
-          tags: tindy2013/subconverter:latest
+          tags: asdlokj1qpi23/subconverter:latest
           build-args: |
             SHA=${{ steps.vars.outputs.sha_short }}
           outputs: type=image,push=true
@@ -60,7 +60,7 @@ jobs:
         with:
           platforms: linux/amd64
           context: scripts/
-          tags: tindy2013/subconverter:${{steps.version.outputs.result}}
+          tags: asdlokj1qpi23/subconverter:${{steps.version.outputs.result}}
           outputs: type=image,push=true
 
       - name: Save digest
@@ -106,7 +106,7 @@ jobs:
         with:
           platforms: linux/386
           context: scripts/
-          tags: tindy2013/subconverter:latest
+          tags: asdlokj1qpi23/subconverter:latest
           build-args: |
             SHA=${{ steps.vars.outputs.sha_short }}
           outputs: type=image,push=true
@@ -127,7 +127,7 @@ jobs:
         with:
           platforms: linux/386
           context: scripts/
-          tags: tindy2013/subconverter:${{steps.version.outputs.result}}
+          tags: asdlokj1qpi23/subconverter:${{steps.version.outputs.result}}
           outputs: type=image,push=true
 
       - name: Save digest
@@ -146,13 +146,14 @@ jobs:
 
   armv7_build:
     name: Build ARMv7 Image
-    runs-on: [self-hosted, linux, ARM]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout base
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -173,7 +174,7 @@ jobs:
         with:
           platforms: linux/arm/v7
           context: scripts/
-          tags: tindy2013/subconverter:latest
+          tags: asdlokj1qpi23/subconverter:latest
           build-args: |
             SHA=${{ steps.vars.outputs.sha_short }}
             THREADS=4
@@ -195,7 +196,7 @@ jobs:
         with:
           platforms: linux/arm/v7
           context: scripts/
-          tags: tindy2013/subconverter:${{steps.version.outputs.result}}
+          tags: asdlokj1qpi23/subconverter:${{steps.version.outputs.result}}
           build-args: |
             THREADS=4
           outputs: type=image,push=true
@@ -216,13 +217,14 @@ jobs:
 
   arm64_build:
     name: Build ARM64 Image
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout base
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -243,7 +245,7 @@ jobs:
         with:
           platforms: linux/arm64
           context: scripts/
-          tags: tindy2013/subconverter:latest
+          tags: asdlokj1qpi23/subconverter:latest
           build-args: |
             SHA=${{ steps.vars.outputs.sha_short }}
             THREADS=4
@@ -265,7 +267,7 @@ jobs:
         with:
           platforms: linux/arm64
           context: scripts/
-          tags: tindy2013/subconverter:${{steps.version.outputs.result}}
+          tags: asdlokj1qpi23/subconverter:${{steps.version.outputs.result}}
           build-args: |
             THREADS=4
           outputs: type=image,push=true
@@ -287,6 +289,7 @@ jobs:
   build:
     name: Build
     needs: [amd64_build, x86_build, armv7_build, arm64_build]
+#    needs: [amd64_build, x86_build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout base
