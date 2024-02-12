@@ -1,0 +1,10 @@
+GEOSITE,icloud@cn
+GEOSITE,apple@cn
+GEOSITE,apple-cn
+GEOSITE,microsoft@cn
+GEOSITE,google@cn
+GEOSITE,geolocation-cn
+
+GEOIP,private,no-resolve
+GEOIP,lan,no-resolve
+GEOIP,cn

@@ -1,0 +1,8 @@
+
+GEOSITE,facebook
+GEOSITE,youtube
+
+GEOSITE,geolocation-!cn
+
+GEOIP,telegram,no-resolve
+
