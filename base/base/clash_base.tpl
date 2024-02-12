@@ -21,7 +21,12 @@ dns:
     - '*.lan'
     - localhost.ptlogin2.qq.com
   nameserver-policy:
-    'geosite:cn': https://223.5.5.5/dns-query
+    'geosite:cn,private': 
+      - https://223.5.5.5/dns-query
+    'geosite:gfw': 
+      - https://1.1.1.1/dns-query
+    'geosite:!cn': 
+      - https://1.1.1.1/dns-query
   nameserver:
     - https://223.5.5.5/dns-query
   fallback:
@@ -53,7 +58,7 @@ global-client-fingerprint: chrome
 
 geodata-mode: true 
 
-geodata-loader: standard
+geodata-loader: memconservative
 
 geo-auto-update: true
 
