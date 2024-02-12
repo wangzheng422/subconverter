@@ -9,8 +9,9 @@ external-controller: :9090
 
 dns:
   enable: true
+  use-hosts: true
   prefer-h3: true
-  listen: 0.0.0.0:10053
+  listen: 127.0.0.1:10053
   ipv6: true
   default-nameserver:
     - 223.5.5.5
@@ -52,10 +53,46 @@ global-client-fingerprint: chrome
 
 geodata-mode: true 
 
+geodata-loader: standard
+
+geo-auto-update: true
+
+geo-update-interval: 24
+
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
 proxy-groups: ~
-rules: ~
+rules:
+  # rule GEOSITE
+  - GEOSITE,category-ads-all,🛑 全球拦截
+
+  # - GEOSITE,icloud@cn,🎯 全球直连
+  # - GEOSITE,apple@cn,🎯 全球直连
+  # - GEOSITE,apple-cn,🎯 全球直连
+  # - GEOSITE,google@cn,🎯 全球直连
+  # - GEOSITE,microsoft@cn,🎯 全球直连
+  - GEOSITE,geolocation-cn,🎯 全球直连
+
+  - GEOSITE,facebook,🌍 国外代理
+  - GEOSITE,youtube,🌍 国外代理
+  - GEOSITE,google,🌍 国外代理
+  - GEOSITE,microsoft,🌍 国外代理
+  - GEOSITE,apple,🌍 国外代理
+  - GEOSITE,icloud,🌍 国外代理
+  - GEOSITE,geolocation-!cn,🌍 国外代理
+
+  - GEOIP,private,🎯 全球直连,no-resolve
+  - GEOIP,cn,🎯 全球直连
+  - GEOIP,telegram,🌍 国外代理,no-resolve
+
+  - MATCH,🐟 漏网之鱼
+
+
 {% else %}
 Proxy: ~
 Proxy Group: ~
