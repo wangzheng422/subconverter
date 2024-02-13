@@ -23,13 +23,13 @@ dns:
     'geosite:cn,private': 
       - https://223.5.5.5/dns-query
     'geosite:gfw': 
-      - 'https://1.1.1.1/dns-query#proxy'
+      - 'https://1.1.1.1/dns-query#🌍国外代理'
     'geosite:!cn': 
-      - 'https://1.1.1.1/dns-query#proxy'
+      - 'https://1.1.1.1/dns-query#🌍国外代理'
   nameserver:
     - https://223.5.5.5/dns-query
   fallback:
-    - 'https://1.1.1.1/dns-query#proxy'
+    - 'https://1.1.1.1/dns-query#🌍国外代理'
   proxy-server-nameserver:
     - https://223.5.5.5/dns-query
   fallback-filter:
@@ -73,28 +73,28 @@ proxies: ~
 proxy-groups: ~
 rules:
   # rule GEOSITE
-  - GEOSITE,category-ads-all,🛑 全球拦截
+  - GEOSITE,category-ads-all,🛑全球拦截
 
-  # - GEOSITE,icloud@cn,🎯 全球直连
-  # - GEOSITE,apple@cn,🎯 全球直连
-  # - GEOSITE,apple-cn,🎯 全球直连
-  # - GEOSITE,google@cn,🎯 全球直连
-  # - GEOSITE,microsoft@cn,🎯 全球直连
-  - GEOSITE,geolocation-cn,🎯 全球直连
+  # - GEOSITE,icloud@cn,🎯全球直连
+  # - GEOSITE,apple@cn,🎯全球直连
+  # - GEOSITE,apple-cn,🎯全球直连
+  # - GEOSITE,google@cn,🎯全球直连
+  # - GEOSITE,microsoft@cn,🎯全球直连
+  - GEOSITE,geolocation-cn,🎯全球直连
 
-  - GEOSITE,facebook,🌍 国外代理
-  - GEOSITE,youtube,🌍 国外代理
-  - GEOSITE,google,🌍 国外代理
-  - GEOSITE,microsoft,🌍 国外代理
-  - GEOSITE,apple,🌍 国外代理
-  - GEOSITE,icloud,🌍 国外代理
-  - GEOSITE,geolocation-!cn,🌍 国外代理
+  - GEOSITE,facebook,🌍国外代理
+  - GEOSITE,youtube,🌍国外代理
+  - GEOSITE,google,🌍国外代理
+  - GEOSITE,microsoft,🌍国外代理
+  - GEOSITE,apple,🌍国外代理
+  - GEOSITE,icloud,🌍国外代理
+  - GEOSITE,geolocation-!cn,🌍国外代理
 
-  - GEOIP,private,🎯 全球直连,no-resolve
-  - GEOIP,cn,🎯 全球直连
-  - GEOIP,telegram,🌍 国外代理,no-resolve
+  - GEOIP,private,🎯全球直连,no-resolve
+  - GEOIP,cn,🎯全球直连
+  - GEOIP,telegram,🌍国外代理,no-resolve
 
-  - MATCH,🐟 漏网之鱼
+  - MATCH,🐟漏网之鱼
 
 
 {% else %}

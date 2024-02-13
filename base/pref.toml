@@ -197,38 +197,38 @@ import = "snippets/emoji.toml"
 # import = "snippets/groups.toml"
 
 [[custom_groups]]
-name = "🔰 节点选择"
+name = "🔰节点选择"
 type = "select"
-rule = ["[]♻️ 自动选择", "[]🎯 全球直连", ".*"]
+rule = ["[]♻️自动选择", "[]🎯全球直连", ".*"]
 
 [[custom_groups]]
-name = "♻️ 自动选择"
+name = "♻️自动选择"
 type = "url-test"
 rule = [".*"]
 url = "http://www.gstatic.com/generate_204"
 interval = 300
 
 [[custom_groups]]
-name = "🌍 国外代理"
+name = "🌍国外代理"
 type = "select"
-rule = ["[]🔰 节点选择",
-"[]🎯 全球直连"]
+rule = ["[]🔰节点选择",
+"[]🎯全球直连"]
 
 [[custom_groups]]
-name = "🎯 全球直连"
+name = "🎯全球直连"
 type = "select"
 rule = ["[]DIRECT"]
 
 [[custom_groups]]
-name = "🛑 全球拦截"
+name = "🛑全球拦截"
 type = "select"
 rule = ["[]REJECT", "[]DIRECT"]
 
 [[custom_groups]]
-name = "🐟 漏网之鱼"
+name = "🐟漏网之鱼"
 type = "select"
-rule = ["[]🔰 节点选择",
-"[]🎯 全球直连"]
+rule = ["[]🔰节点选择",
+"[]🎯全球直连"]
 
 
 [ruleset]
@@ -251,19 +251,19 @@ update_ruleset_on_request = false
 # import = "snippets/rulesets.toml"
 
 [[rulesets]]
-group = "🛑 全球拦截"
+group = "🛑全球拦截"
 ruleset = "rules/wzh/ad.list"
 
 [[rulesets]]
-group = "🌍 国外代理"
+group = "🌍国外代理"
 ruleset = "rules/wzh/proxy.list"
 
 [[rulesets]]
-group = "🎯 全球直连"
+group = "🎯全球直连"
 ruleset = "rules/wzh/direct.list"
 
 [[rulesets]]
-group = "🐟 漏网之鱼"
+group = "🐟漏网之鱼"
 ruleset = "[]FINAL"
 
 
