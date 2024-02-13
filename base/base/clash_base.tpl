@@ -10,7 +10,6 @@ external-controller: :9090
 dns:
   enable: true
   use-hosts: true
-  prefer-h3: true
   listen: 127.0.0.1:10053
   ipv6: true
   default-nameserver:
@@ -24,13 +23,13 @@ dns:
     'geosite:cn,private': 
       - https://223.5.5.5/dns-query
     'geosite:gfw': 
-      - https://1.1.1.1/dns-query
+      - 'https://1.1.1.1/dns-query#proxy'
     'geosite:!cn': 
-      - https://1.1.1.1/dns-query
+      - 'https://1.1.1.1/dns-query#proxy'
   nameserver:
     - https://223.5.5.5/dns-query
   fallback:
-    - https://1.1.1.1/dns-query
+    - 'https://1.1.1.1/dns-query#proxy'
   proxy-server-nameserver:
     - https://223.5.5.5/dns-query
   fallback-filter:
