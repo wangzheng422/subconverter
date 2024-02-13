@@ -20,11 +20,11 @@ dns:
     - '*.lan'
     - localhost.ptlogin2.qq.com
   nameserver-policy:
-    'geosite:cn,private': 
+    'geosite:geolocation-cn,private': 
       - https://223.5.5.5/dns-query
     'geosite:gfw': 
       - 'https://1.1.1.1/dns-query#🌍国外代理'
-    'geosite:!cn': 
+    'geosite:geolocation-!cn': 
       - 'https://1.1.1.1/dns-query#🌍国外代理'
   nameserver:
     - https://223.5.5.5/dns-query
