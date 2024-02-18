@@ -117,12 +117,12 @@ Rule: ~
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "tls://1.1.1.1",
+                "address": "https://1.1.1.1/dns-query",
                 "address_resolver": "dns_resolver"
             },
             {
                 "tag": "dns_direct",
-                "address": "h3://dns.alidns.com/dns-query",
+                "address": "https://dns.alidns.com/dns-query",
                 "address_resolver": "dns_resolver",
                 "detour": "DIRECT"
             },
