@@ -118,11 +118,12 @@ Rule: ~
             {
                 "tag": "dns_proxy",
                 "address": "https://1.1.1.1/dns-query",
-                "address_resolver": "dns_resolver"
+                "address_resolver": "dns_resolver",
+                "detour": "🌍国外代理"
             },
             {
                 "tag": "dns_direct",
-                "address": "https://dns.alidns.com/dns-query",
+                "address": "https://223.5.5.5/dns-query",
                 "address_resolver": "dns_resolver",
                 "detour": "DIRECT"
             },
@@ -145,23 +146,27 @@ Rule: ~
                 "outbound": [
                     "any"
                 ],
-                "server": "dns_resolver"
-            },
-            {
-                "geosite": [
-                    "category-ads-all"
-                ],
-                "server": "dns_block",
-                "disable_cache": true
-            },
-            {
-                "geosite": [
-                    "geolocation-cn"
-                ],
                 "server": "dns_direct"
+            },
+            {
+              "inbound": "tun",
+              "query_type": [
+                "A",
+                "AAAA"
+              ],
+              "server": "fakeip",
+              "rewrite_ttl": 1
+            },
+            {
+                "rule_set": "geolocation-!cn",
+                "server": "dns_proxy"
+            },
+            {
+              "rule_set": "cn",
+              "server": "dns_direct"
             }
         ],
-        "final": "dns_proxy",
+        "final": "dns_direct",
         "independent_cache": true,
         "fakeip": {
             "enabled": true,
@@ -170,13 +175,6 @@ Rule: ~
             {% endif %}
             "inet4_range": "198.18.0.0\/15"
         }
-    },
-    "ntp": {
-        "enabled": true,
-        "server": "time.apple.com",
-        "server_port": 123,
-        "interval": "30m",
-        "detour": "DIRECT"
     },
     "inbounds": [
         {
@@ -198,37 +196,55 @@ Rule: ~
             {% endif %}
             "auto_route": true,
             "strict_route": true,
-            "stack": "mixed",
-            "sniff": true
+            "stack": "system",
+            "sniff": true,
+            "platform": {
+              "http_proxy": {
+                "enabled": true,
+                "server": "127.0.0.1",
+                "server_port": 2080
+              }
+            }
         }
     ],
     "outbounds": [],
     "route": {
         "rules": [
           {
-            "geoip": "private",
+            "ip_is_private": true,
             "outbound": "🎯全球直连"
           },
           {
-            "geoip": "cn",
+            "rule_set": "cn",
             "outbound": "🎯全球直连"
           },
           {
-            "geosite": "cn",
-            "outbound": "🎯全球直连"
+            "rule_set": "geolocation-!cn",
+            "outbound": "🌍国外代理"
           }
         ],
-        "geoip": {
-          "download_detour": "🌍国外代理"
-        },
-        "geosite": {
-          "download_detour": "🌍国外代理"
-        },
+        "rule_set": [
+            {
+              "tag": "cn",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/mixed/cn.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "geolocation-!cn",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-!cn.srs",
+              "download_detour": "🌍国外代理"
+            }
+        ],
         "auto_detect_interface": true
     },
     "experimental": {
         "cache_file": {
-            "enabled": true
+            "enabled": true,
+            "store_fakeip": true
         }
     }
 }
