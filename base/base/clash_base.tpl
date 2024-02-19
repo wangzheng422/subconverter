@@ -156,22 +156,12 @@ Rule: ~
             },
             {
                 "geosite": [
-                    "geolocation-!cn"
+                    "geolocation-cn"
                 ],
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "dns_fakeip"
-            },
-            {
-                "geosite": [
-                    "geolocation-!cn"
-                ],
-                "server": "dns_proxy"
+                "server": "dns_direct"
             }
         ],
-        "final": "dns_direct",
+        "final": "dns_proxy",
         "independent_cache": true,
         "fakeip": {
             "enabled": true,
@@ -182,7 +172,7 @@ Rule: ~
         }
     },
     "ntp": {
-        "enabled": false,
+        "enabled": true,
         "server": "time.apple.com",
         "server_port": 123,
         "interval": "30m",
@@ -214,10 +204,33 @@ Rule: ~
     ],
     "outbounds": [],
     "route": {
-        "rules": [],
+        "rules": [
+          {
+            "geoip": "private",
+            "outbound": "🎯全球直连"
+          },
+          {
+            "geoip": "cn",
+            "outbound": "🎯全球直连"
+          },
+          {
+            "geosite": "cn",
+            "outbound": "🎯全球直连"
+          }
+        ],
+        "geoip": {
+          "download_detour": "🌍国外代理"
+        },
+        "geosite": {
+          "download_detour": "🌍国外代理"
+        },
         "auto_detect_interface": true
     },
-    "experimental": {}
+    "experimental": {
+        "cache_file": {
+            "enabled": true
+        }
+    }
 }
 
 {% endif %}
