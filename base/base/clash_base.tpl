@@ -118,23 +118,16 @@ Rule: ~
             {
                 "tag": "dns_proxy",
                 "address": "https://1.1.1.1/dns-query",
-                "address_resolver": "dns_resolver",
                 "detour": "🌍国外代理"
             },
             {
                 "tag": "dns_direct",
                 "address": "https://223.5.5.5/dns-query",
-                "address_resolver": "dns_resolver",
                 "detour": "DIRECT"
             },
             {
                 "tag": "dns_fakeip",
                 "address": "fakeip"
-            },
-            {
-                "tag": "dns_resolver",
-                "address": "223.5.5.5",
-                "detour": "DIRECT"
             },
             {
                 "tag": "block",
@@ -166,7 +159,7 @@ Rule: ~
               "server": "dns_direct"
             }
         ],
-        "final": "dns_direct",
+        "final": "dns_proxy",
         "independent_cache": true,
         "fakeip": {
             "enabled": true,

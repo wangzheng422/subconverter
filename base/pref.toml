@@ -229,7 +229,7 @@ rule = ["[]DIRECT"]
 [[custom_groups]]
 name = "🛑全球拦截"
 type = "select"
-rule = ["[]REJECT", "[]DIRECT"]
+rule = ["[]DIRECT","[]REJECT", "[]🔰节点选择"]
 
 [[custom_groups]]
 name = "🐟漏网之鱼"
