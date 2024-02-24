@@ -74,6 +74,7 @@ proxies: ~
 proxy-groups: ~
 rules:
   # rule GEOSITE
+
   - GEOSITE,category-ads-all,🛑全球拦截
 
   # - GEOSITE,icloud@cn,🎯全球直连
@@ -81,7 +82,10 @@ rules:
   # - GEOSITE,apple-cn,🎯全球直连
   # - GEOSITE,google@cn,🎯全球直连
   # - GEOSITE,microsoft@cn,🎯全球直连
+
   - GEOSITE,geolocation-cn,🎯全球直连
+
+  - DOMAIN-SUFFIX,demo-gpu.wzhlab.top,🎯全球直连
 
   - GEOSITE,facebook,🌍国外代理
   - GEOSITE,youtube,🌍国外代理
@@ -95,7 +99,7 @@ rules:
   - GEOIP,cn,🎯全球直连
   - GEOIP,telegram,🌍国外代理,no-resolve
 
-  - MATCH,🐟漏网之鱼
+  # - MATCH,🐟漏网之鱼
 
 
 {% else %}
