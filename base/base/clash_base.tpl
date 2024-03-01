@@ -155,8 +155,8 @@ Rule: ~
               "rewrite_ttl": 1
             },
             {
-                "rule_set": "geolocation-!cn",
-                "server": "dns_proxy"
+              "rule_set": "geolocation-cn",
+              "server": "dns_direct"
             },
             {
               "rule_set": "cn",
@@ -216,6 +216,34 @@ Rule: ~
             "outbound": "🎯全球直连"
           },
           {
+            "rule_set": "google",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "microsoft",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "bing",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "youtube",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "facebook",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "apple",
+            "outbound": "🌍国外代理"
+          },
+          {
+            "rule_set": "icloud",
+            "outbound": "🌍国外代理"
+          },
+          {
             "rule_set": "geolocation-!cn",
             "outbound": "🌍国外代理"
           }
@@ -225,7 +253,14 @@ Rule: ~
               "tag": "cn",
               "type": "remote",
               "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/mixed/cn.srs",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/mixed/cn.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "geolocation-cn",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-cn.srs",
               "download_detour": "🌍国外代理"
             },
             {
@@ -233,6 +268,55 @@ Rule: ~
               "type": "remote",
               "format": "binary",
               "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-!cn.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "google",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/google.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "microsoft",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/microsoft.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "bing",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/bing.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "youtube",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/youtube.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "facebook",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/facebook.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "apple",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/apple.srs",
+              "download_detour": "🌍国外代理"
+            },
+            {
+              "tag": "icloud",
+              "type": "remote",
+              "format": "binary",
+              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/icloud.srs",
               "download_detour": "🌍国外代理"
             }
         ],
