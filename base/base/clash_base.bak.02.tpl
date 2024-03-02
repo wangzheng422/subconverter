@@ -14,146 +14,81 @@ dns:
   listen: 127.0.0.1:10053
   ipv6: true
   default-nameserver:
-    - https://223.5.5.5/dns-query
+    - 223.5.5.5
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "*"
-    - "+.lan"
-    - "+.local"
+    - '*.lan'
+    - localhost.ptlogin2.qq.com
+  nameserver-policy:
+    'geosite:geolocation-cn,private': 
+      - https://223.5.5.5/dns-query
+    'geosite:gfw': 
+      - 'https://1.1.1.1/dns-query#🌍国外代理'
+    'geosite:geolocation-!cn': 
+      - 'https://1.1.1.1/dns-query#🌍国外代理'
   nameserver:
     - https://223.5.5.5/dns-query
-  nameserver-policy:
-    'rule-set:ads': rcode://success
-    'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://223.5.5.5/dns-query]
-    'rule-set:cn,private': [https://223.5.5.5/dns-query]
-    'rule-set:proxy': ['https://1.1.1.1/dns-query#🌍国外代理']
+  fallback:
+    - 'https://1.1.1.1/dns-query#🌍国外代理'
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
+    ipcidr:
+      - 240.0.0.0/4
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
 
 
 profile:
   store-fake-ip: true
   # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
-  store-selected: true
 
-unified-delay: false
+unified-delay: true
 
 tcp-concurrent: true
 
 global-client-fingerprint: chrome
 
+geodata-mode: true 
+
+geodata-loader: standard
+
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
 proxy-groups: ~
-
-rule-providers:
-  ads:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/ads.list"
-    interval: 86400
-
-  applications:
-    type: http
-    behavior: classical
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/applications.list"
-    interval: 86400
-
-  private:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/private.list"
-    interval: 86400
-
-  microsoft-cn:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/microsoft-cn.list"
-    interval: 86400
-
-  apple-cn:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/apple-cn.list"
-    interval: 86400
-
-  google-cn:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/google-cn.list"
-    interval: 86400
-
-  games-cn:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/games-cn.list"
-    interval: 86400
-
-  networktest:
-    type: http
-    behavior: classical
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/networktest.list"
-    interval: 86400
-
-  proxy:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/proxy.list"
-    interval: 86400
-
-  cn:
-    type: http
-    behavior: domain
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cn.list"
-    interval: 86400
-
-  telegramip:
-    type: http
-    behavior: ipcidr
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/telegramip.list"
-    interval: 86400
-
-  privateip:
-    type: http
-    behavior: ipcidr
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/privateip.list"
-    interval: 86400
-
-  cnip:
-    type: http
-    behavior: ipcidr
-    format: text
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash-ruleset/cnip.list"
-    interval: 86400
-
 rules:
+  # rule GEOSITE
 
-  - RULE-SET,ads,🛑全球拦截
-  # - RULE-SET,applications,🎯全球直连
-  - RULE-SET,private,🎯全球直连
-  - RULE-SET,microsoft-cn,🎯全球直连
-  - RULE-SET,apple-cn,🎯全球直连
-  - RULE-SET,google-cn,🎯全球直连
-  - RULE-SET,games-cn,🎯全球直连
-  - RULE-SET,networktest,🎯全球直连
-  - RULE-SET,proxy,🌍国外代理
-  - RULE-SET,cn,🎯全球直连
-  - RULE-SET,telegramip,🌍国外代理
-  - RULE-SET,privateip,🎯全球直连,no-resolve
-  - RULE-SET,cnip,🎯全球直连
+  - GEOSITE,category-ads-all,🛑全球拦截
+
+  # - GEOSITE,icloud@cn,🎯全球直连
+  # - GEOSITE,apple@cn,🎯全球直连
+  # - GEOSITE,apple-cn,🎯全球直连
+  # - GEOSITE,google@cn,🎯全球直连
+  # - GEOSITE,microsoft@cn,🎯全球直连
+
+  - GEOSITE,geolocation-cn,🎯全球直连
 
   - DOMAIN-SUFFIX,demo-gpu.wzhlab.top,🎯全球直连
+
+  - GEOSITE,facebook,🌍国外代理
+  - GEOSITE,youtube,🌍国外代理
+  - GEOSITE,google,🌍国外代理
+  - GEOSITE,microsoft,🌍国外代理
+  - GEOSITE,apple,🌍国外代理
+  - GEOSITE,icloud,🌍国外代理
+  - GEOSITE,geolocation-!cn,🌍国外代理
+
+  - GEOIP,private,🎯全球直连,no-resolve
+  - GEOIP,cn,🎯全球直连
+  - GEOIP,telegram,🌍国外代理,no-resolve
 
   # - MATCH,🐟漏网之鱼
 
