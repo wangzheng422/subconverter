@@ -58,7 +58,16 @@ global-client-fingerprint: chrome
 
 geodata-mode: true 
 
-geodata-loader: standard
+geodata-loader: memconservative
+
+geo-auto-update: true
+
+geo-update-interval: 24
+
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
