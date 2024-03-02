@@ -137,25 +137,42 @@ Rule: ~
                 "server": "dns_direct"
             },
             {
-              "inbound": "tun",
-              "query_type": [
-                "A",
-                "AAAA"
-              ],
-              "server": "fakeip",
-              "rewrite_ttl": 1
+                  "rule_set": [
+                        "ads"
+                  ],
+                  "server": "dns_block"
             },
             {
-              "rule_set": "geolocation-cn",
-              "server": "dns_direct"
+                  "rule_set": [
+                        "microsoft-cn",
+                        "apple-cn",
+                        "google-cn",
+                        "games-cn",
+                        "cn",
+                        "private"
+                  ],
+                  "query_type": [
+                        "A",
+                        "AAAA"
+                  ],
+                  "server": "dns_direct"
             },
             {
-              "rule_set": "cn",
-              "server": "dns_direct"
+                  "rule_set": [
+                        "proxy"
+                  ],
+                  "query_type": [
+                        "A",
+                        "AAAA"
+                  ],
+                  "server": "dns_fakeip",
+                  "rewrite_ttl": 1
             }
         ],
-        "final": "dns_proxy",
+        "final": "dns_direct",
+        "strategy": "prefer_ipv4",
         "independent_cache": true,
+        "reverse_mapping": true,
         "fakeip": {
             "enabled": true,
             {% if default(request.singbox.ipv6, "") == "1" %}
@@ -186,6 +203,7 @@ Rule: ~
             "strict_route": true,
             "stack": "system",
             "sniff": true,
+            "sniff_override_destination": true,
             "platform": {
               "http_proxy": {
                 "enabled": true,
@@ -198,118 +216,117 @@ Rule: ~
     "outbounds": [],
     "route": {
         "rules": [
+            { "protocol": [ "dns" ], "outbound": "dns-out" },
+            { "rule_set": [ "ads" ], "outbound": "🛑全球拦截" },
+            { "rule_set": [ "private" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "microsoft-cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "apple-cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "google-cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "games-cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "networktest" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "applications" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "proxy" ], "outbound": "🌍国外代理" },
+            { "rule_set": [ "cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "telegramip" ], "outbound": "🌍国外代理" },
+            { "rule_set": [ "privateip" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "cnip" ], "outbound": "🎯全球直连" },
           {
             "ip_is_private": true,
             "outbound": "🎯全球直连"
-          },
-          {
-            "rule_set": "cn",
-            "outbound": "🎯全球直连"
-          },
-          {
-            "rule_set": "google",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "microsoft",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "bing",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "youtube",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "facebook",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "apple",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "icloud",
-            "outbound": "🌍国外代理"
-          },
-          {
-            "rule_set": "geolocation-!cn",
-            "outbound": "🌍国外代理"
           }
         ],
         "rule_set": [
-            {
-              "tag": "cn",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/mixed/cn.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "geolocation-cn",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-cn.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "geolocation-!cn",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/geolocation-!cn.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "google",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/google.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "microsoft",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/microsoft.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "bing",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/bing.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "youtube",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/youtube.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "facebook",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/facebook.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "apple",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/apple.srs",
-              "download_detour": "🌍国外代理"
-            },
-            {
-              "tag": "icloud",
-              "type": "remote",
-              "format": "binary",
-              "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/icloud.srs",
-              "download_detour": "🌍国外代理"
-            }
+          {
+            "tag": "ads",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "private",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/private.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "microsoft-cn",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "apple-cn",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "google-cn",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "games-cn",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "networktest",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/networktest.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "applications",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/applications.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "proxy",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/proxy.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "cn",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cn.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "telegramip",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/telegramip.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "privateip",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/privateip.srs",
+            "download_detour": "DIRECT"
+          },
+          {
+            "tag": "cnip",
+            "type": "remote",
+            "format": "binary",
+            "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cnip.srs",
+            "download_detour": "DIRECT"
+          }
         ],
         "auto_detect_interface": true
     },
