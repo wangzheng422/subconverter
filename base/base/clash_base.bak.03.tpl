@@ -24,6 +24,7 @@ dns:
   nameserver:
     - https://223.5.5.5/dns-query
   nameserver-policy:
+    'rule-set:ads': rcode://success
     'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://223.5.5.5/dns-query]
     'rule-set:cn,private': [https://223.5.5.5/dns-query]
     'rule-set:proxy': ['https://1.1.1.1/dns-query#🌍国外代理']
@@ -199,6 +200,12 @@ Rule: ~
                     "any"
                 ],
                 "server": "dns_direct"
+            },
+            {
+                  "rule_set": [
+                        "ads"
+                  ],
+                  "server": "dns_block"
             },
             {
                   "rule_set": [
