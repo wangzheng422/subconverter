@@ -143,7 +143,7 @@ rules:
   - RULE-SET,private,🎯全球直连
   - RULE-SET,microsoft-cn,🎯全球直连
   - RULE-SET,apple-cn,🎯全球直连
-  # - RULE-SET,google-cn,🎯全球直连
+  - RULE-SET,google-cn,🎯全球直连
   - RULE-SET,games-cn,🎯全球直连
   - RULE-SET,networktest,🎯全球直连
   - RULE-SET,proxy,🌍国外代理
@@ -279,6 +279,7 @@ Rule: ~
             { "rule_set": [ "private" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "microsoft-cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "apple-cn" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "google-cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "games-cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "networktest" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "applications" ], "outbound": "🎯全球直连" },
