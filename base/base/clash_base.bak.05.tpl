@@ -281,6 +281,7 @@ Rule: ~
             { "rule_set": [ "apple-cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "games-cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "networktest" ], "outbound": "🎯全球直连" },
+            { "rule_set": [ "applications" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "proxy" ], "outbound": "🌍国外代理" },
             { "rule_set": [ "cn" ], "outbound": "🎯全球直连" },
             { "rule_set": [ "telegramip" ], "outbound": "🌍国外代理" },
