@@ -176,7 +176,7 @@ Rule: ~
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "https://1.1.1.1/dns-query",
+                "address": "https://8.8.8.8/dns-query",
                 "detour": "🌍国外代理"
             },
             {
