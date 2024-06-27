@@ -49,16 +49,6 @@
                 "geosite": [
                     "geolocation-!cn"
                 ],
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "dns_fakeip"
-            },
-            {
-                "geosite": [
-                    "geolocation-!cn"
-                ],
                 "server": "dns_proxy"
             }
         ],
