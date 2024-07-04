@@ -26,7 +26,7 @@ dns:
   nameserver-policy:
     'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://223.5.5.5/dns-query]
     'rule-set:cn,private': [https://223.5.5.5/dns-query]
-    'rule-set:proxy': ['https://1.1.1.1/dns-query#🌍国外代理']
+    'rule-set:proxy': ['https://8.8.8.8/dns-query#🌍国外代理']
 
 
 profile:
@@ -204,7 +204,6 @@ Rule: ~
                   "rule_set": [
                         "microsoft-cn",
                         "apple-cn",
-                        "google-cn",
                         "games-cn",
                         "cn",
                         "private"
@@ -223,8 +222,7 @@ Rule: ~
                         "A",
                         "AAAA"
                   ],
-                  "server": "dns_fakeip",
-                  "rewrite_ttl": 1
+                  "server": "dns_proxy"
             }
         ],
         "final": "dns_direct",
